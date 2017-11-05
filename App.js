@@ -1,14 +1,41 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
-export default class App extends React.Component {
+const AppNav = StackNavigator({
+	Home: { screen: HomeScreen },
+	NewList: { screen: NewListScreen },
+	PrevLists: { screen: PrevListsScreen }
+});
+
+class App extends React.Component {
+
+	static navigationOptions = {
+		title: 'Welcome'
+	}
+
 	render() {
+		const { navigate } = this.props.navigation;
+
 		return (
 			<View style={styles.container}>
-				<Text>Open up App.js to start working on your app!</Text>
-				<Text>Changes you make will automatically reload.</Text>
-				<Text>Shake your phone to open the developer menu.</Text>
-				<Text>Hello World!</Text>
+				<Text style={styles.title}>Shopping List</Text>
+				<View style={styles.button}>
+					<Button
+						onPress={() => {return; }}
+						title="Create New List"
+						color="#1c84c6"
+						accessibilityLabel="Create new shopping list"
+					/>
+				</View>
+				<View style={styles.button}>
+					<Button
+						onPress={() => {return;}}
+						title="View Previous Lists"
+						color="#1c84c6"
+						accessibilityLabel="View previous shopping lists"
+					/>
+				</View>
 			</View>
 		);
 	}
@@ -16,9 +43,19 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		marginTop: '10%',
+		padding: '5%',
 		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center',
 	},
+	title: {
+		fontSize: 25,
+		textAlign: 'center',
+		marginBottom: '5%'
+	},
+	button: {
+		padding: '5%'
+	}
 });
+
+export default App;
+
